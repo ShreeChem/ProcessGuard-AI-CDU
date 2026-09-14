@@ -8,13 +8,14 @@ ProcessGuard-AI-CDU is an engineering/AI portfolio prototype for an Atmospheric 
 
 https://processguard-cdu.hatchable.site/
 
-## Baseline
+## Current baseline
 
-- Official reconstruction baseline: **Hatchable V15**
-- Deployment date: **14 September 2026**
-- Runtime source in `public/` is a byte-identical copy of the deployed V15 HTML/CSS/JavaScript, verified against Hatchable SHA-256 hashes.
+- Official baseline: **Hatchable V16**
+- V16 deployed: **14 September 2026**
+- V16 is a focused **readability/UI patch**. The application logic and HTML structure are unchanged from V15; the stylesheet adds improved large-screen typography/readability.
+- Runtime files in `public/`: `index.html`, `styles.css`, `app.js`.
 - Data: synthetic demonstration data only.
-- Current application architecture: browser-only; no backend or database.
+- Current architecture: browser-only; no backend or database.
 
 ## Current scenarios
 
@@ -32,7 +33,7 @@ The application includes an operator view, engineer view, scenario testing, tag 
 
 ## AI/ML positioning
 
-The deployed V15 does **not** contain a trained production ML model. Its current predictive layer is based on synthetic process-response calculations, residuals, diagnostic rules, engineering scoring and forecast logic. An Isolation Forest concept and expanded individual Pumparound/side-stripper scenarios are retained in the roadmap rather than represented as deployed capability.
+The current V16 prototype does **not** contain a trained production ML model. Its predictive layer is based on synthetic process-response calculations, residuals, diagnostic rules, engineering scoring and forecast logic. An Isolation Forest concept and expanded individual pumparound/side-stripper scenarios remain roadmap items rather than deployed capabilities.
 
 ## Safety boundary
 
@@ -43,13 +44,17 @@ The deployed V15 does **not** contain a trained production ML model. Its current
 
 ## Run locally
 
-Serve the repository root with any static web server, for example:
+Serve the `public/` directory with any static web server, for example:
 
 ```bash
 python -m http.server 8080 --directory public
 ```
 
 Then open `http://localhost:8080`.
+
+## Version history
+
+See `CHANGELOG.md` for the V15 → V16 update history.
 
 ## Public-repository privacy
 
