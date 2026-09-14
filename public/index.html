@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="ProcessGuard AI CDU predictive operations dashboard">
+  <title>ProcessGuard AI | CDU Intelligence</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="side-brand">
+      <div class="plant-logo" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div><strong>ProcessGuard AI</strong><small>CDU Intelligence for Safer,<br>Smarter Operations</small></div>
+    </div>
+    <nav class="side-nav" aria-label="Application navigation">
+      <button class="active" data-view-link="overview"><span>⌂</span>Overview</button>
+      <button data-view-link="operator"><span>◉</span>Operator View</button>
+      <button data-view-link="engineer"><span>◇</span>Engineer View</button>
+      <button data-view-link="trends"><span>⌁</span>Trends &amp; Analytics</button>
+      <button data-view-link="scenario"><span>▶</span>Scenario Testing</button>
+      <button data-view-link="tags"><span>⌕</span>Tag Explorer</button>
+      <button data-view-link="alarms"><span>!</span>Alarm Comparison <b id="alarmNavBadge">0</b></button>
+      <button data-view-link="kpis"><span>▦</span>Mass Balance &amp; KPIs</button>
+      <button data-view-link="ai"><span>✦</span>AI Explanation <b id="incidentNavBadge">0</b></button>
+      <button data-view-link="reports"><span>▤</span>Reports</button>
+      <button data-view-link="settings"><span>⚙</span>Settings</button>
+    </nav>
+    <div class="side-promo">
+      <div class="refinery-silhouette" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <strong>Turning<br>Process Data<br>into Safer Decisions</strong>
+      <small>AI + physics + plant context</small>
+    </div>
+  </aside>
+
+  <div class="app-main">
+    <header class="top-header">
+      <div class="header-title">
+        <h1>Atmospheric Crude Distillation Unit (CDU)</h1>
+        <p>Monitor <i></i> Diagnose <i></i> Understand <i></i> Support</p>
+      </div>
+      <div class="header-right">
+        <div class="date-box"><span id="headerDate">08 Sep 2025</span><strong id="headerTime">14:32</strong></div>
+        <div id="unitStatusBox" class="unit-status healthy"><span class="status-check">✓</span><div><strong id="unitStatusTitle">Unit Operating Normally</strong><small id="unitStatusText">No critical issues. AI monitoring active.</small></div></div>
+      </div>
+    </header>
+
+    <div class="action-strip">
+      <div class="sim-state"><i id="simDot"></i><span id="simStateText">SIMULATOR HELD</span><span class="sim-runtime-label">SIM TIME</span><small id="simTime">00:00:00</small></div>
+      <div class="action-buttons">
+        <button id="startBtn" class="action primary">▶ Start live plant</button>
+        <button id="pauseBtn" class="action" disabled>Ⅱ Pause</button>
+        <button id="steadyBtn" class="action">↶ Steady state</button>
+        <button id="stopBtn" class="action">■ Stop & reset</button>
+        <button id="injectBtn" class="action accent" disabled>＋ Inject scenario</button>
+        <label class="workspace-select"><span>Workspace:</span><select id="roleSelect" class="compact-select" aria-label="Workspace" title="Switch between the overview, operator-focused and engineer-focused workspace"><option value="overview">Overview</option><option value="operator">Operator View</option><option value="engineer">Engineer View</option></select></label>
+        <label class="workspace-select"><span>Demo speed:</span><select id="speedSelect" class="compact-select" aria-label="Simulation speed" title="Relative speed of the compressed ProcessGuard demo"><option value="0.5">0.5×</option><option value="1">1.0×</option><option value="1.5" selected>1.5×</option><option value="2">2.0×</option></select></label>
+        <select id="languageSelect" class="compact-select" aria-label="Language"><option value="EN">EN</option><option value="DE">DE</option></select>
+      </div>
+    </div>
+
+    <main class="page-content">
+      <section class="view active" id="view-overview">
+        <div class="overview-grid">
+          <section class="process-card">
+            <div class="card-heading process-heading">
+              <div><h2>CDU Process Overview <span class="info-dot">i</span></h2><p>Simplified flowsheet with key parameters (live or simulated data)</p></div>
+              <label class="display-select">Display: <select id="displayMode" title="Change what the CDU PFD emphasizes"><option value="values">Live Values</option><option value="equipment">Equipment Focus</option><option value="ai">AI Status</option></select><span id="displayStatusChip" class="display-status-chip">Live values</span></label>
+            </div>
+
+            <div class="pfd-wrap">
+              <svg id="cduPfd" viewBox="0 0 1080 610" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Simplified atmospheric crude distillation unit process flow diagram">
+                <defs>
+                  <marker id="arrowGreen" markerWidth="7" markerHeight="6" refX="6.6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#15985f"/></marker>
+                  <marker id="arrowBlue" markerWidth="7" markerHeight="6" refX="6.6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1678d4"/></marker>
+                  <marker id="arrowYellow" markerWidth="7" markerHeight="6" refX="6.6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#efa800"/></marker>
+                  <marker id="arrowOrange" markerWidth="7" markerHeight="6" refX="6.6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#f06a24"/></marker>
+                  <marker id="arrowRed" markerWidth="7" markerHeight="6" refX="6.6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#ed312f"/></marker>
+                  <marker id="arrowGray" markerWidth="7" markerHeight="6" refX="6.6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#6b7b87"/></marker>
+                  <linearGradient id="vesselBlue" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#e7f7ff"/><stop offset=".44" stop-color="#6dc0e8"/><stop offset="1" stop-color="#2b78b6"/></linearGradient>
+                  <linearGradient id="heaterGrad" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#ffeb9b"/><stop offset=".42" stop-color="#ff9d42"/><stop offset="1" stop-color="#ef4036"/></linearGradient>
+                  <linearGradient id="columnGrad" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#cdeeff"/><stop offset=".18" stop-color="#d4f1ff"/><stop offset=".35" stop-color="#bce79e"/><stop offset=".56" stop-color="#ffe38a"/><stop offset=".78" stop-color="#f8a55d"/><stop offset="1" stop-color="#ef4740"/></linearGradient>
+                  <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#163d5e" flood-opacity=".18"/></filter>
+                </defs>
+
+                <g id="streamGroup" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path class="pipe green" d="M25 377H107" marker-end="url(#arrowGreen)"/>
+                  <path class="pipe green" d="M147 377H225" marker-end="url(#arrowGreen)"/>
+                  <path class="pipe green" d="M355 377H520" marker-end="url(#arrowGreen)"/>
+                  <path class="pipe furnace-feed" d="M592 377H705V470H744" stroke="#ed542d" marker-end="url(#arrowRed)"/>
+                  <path class="pipe blue overhead-line" d="M790 100V58H907" marker-end="url(#arrowBlue)"/>
+                  <path class="pipe blue overhead-line" d="M943 58H1000V92" marker-end="url(#arrowBlue)"/>
+                  <path class="pipe blue ovhd-product-line" d="M1044 82V50H1072" marker-end="url(#arrowBlue)"/>
+                  <path class="pipe green product-overhead" d="M1000 105H1070" marker-end="url(#arrowGreen)"/>
+                  <path class="pipe blue reflux-line" d="M1000 127V157H820V132" marker-end="url(#arrowBlue)"/>
+
+                  <path class="pipe blue pa pa1" d="M744 220H690V205H672" marker-end="url(#arrowBlue)"/>
+                  <path class="pipe blue pa pa2" d="M744 290H690V276H672" marker-end="url(#arrowBlue)"/>
+                  <path class="pipe blue pa pa3" d="M744 365H690V349H672" marker-end="url(#arrowBlue)"/>
+                  <path class="pipe blue pa pa4" d="M744 438H690V423H672" marker-end="url(#arrowBlue)"/>
+                  <path class="pipe blue pa-return" d="M638 205H620V245H744" marker-end="url(#arrowBlue)"/>
+                  <path class="pipe blue pa-return" d="M638 276H620V320H744" marker-end="url(#arrowBlue)"/>
+                  <path class="pipe blue pa-return" d="M638 349H620V395H744" marker-end="url(#arrowBlue)"/>
+                  <path class="pipe blue pa-return" d="M638 423H620V462H744" marker-end="url(#arrowBlue)"/>
+                  <path class="pipe blue" d="M655 446V540" marker-end="url(#arrowBlue)"/>
+
+                  <path class="pipe yellow side-draw" d="M840 230H914" marker-end="url(#arrowYellow)"/>
+                  <path class="pipe yellow side-draw" d="M840 300H914" marker-end="url(#arrowYellow)"/>
+                  <path class="pipe orange side-draw" d="M840 370H914" marker-end="url(#arrowOrange)"/>
+                  <path class="pipe red side-draw" d="M840 441H914" marker-end="url(#arrowRed)"/>
+                  <path class="pipe yellow product-line" d="M944 230H1068" marker-end="url(#arrowYellow)"/>
+                  <path class="pipe yellow product-line" d="M944 300H1068" marker-end="url(#arrowYellow)"/>
+                  <path class="pipe orange product-line" d="M944 370H1068" marker-end="url(#arrowOrange)"/>
+                  <path class="pipe red product-line" d="M944 441H1068" marker-end="url(#arrowRed)"/>
+
+                  <path class="steam-line" d="M927 246V274H868V252H840" marker-end="url(#arrowGray)"/>
+                  <path class="steam-line" d="M927 316V344H868V322H840" marker-end="url(#arrowGray)"/>
+                  <path class="steam-line" d="M927 386V414H868V392H840" marker-end="url(#arrowGray)"/>
+                  <path class="steam-line" d="M927 457V485H868V463H840" marker-end="url(#arrowGray)"/>
+                  <path class="pipe red residue-line" d="M790 520V558H1044" marker-end="url(#arrowRed)"/>
+
+                  <path class="recovery-line" d="M365 245V329"/>
+                  <path class="recovery-line" d="M365 245H410"/>
+                  <path class="recovery-line" d="M365 287H410"/>
+                  <path class="recovery-line" d="M365 329H410"/>
+                  <path class="recovery-line" d="M482 245H498V377H520" marker-end="url(#arrowOrange)"/>
+                  <path class="recovery-line" d="M482 287H498"/>
+                  <path class="recovery-line" d="M482 329H498"/>
+                </g>
+
+                <g class="labels">
+                  <text x="23" y="342" class="stream-name">Crude Feed</text><text x="23" y="358" id="pfdFeedFlow">1,000 m³/h</text><text x="23" y="373" id="pfdFeedTemp">120 °C</text>
+                </g>
+
+                <g class="equipment feed-symbol" filter="url(#softShadow)"><circle cx="127" cy="377" r="20"/><path d="M113 383l13-20 13 20M127 362v31M107 393h40"/></g>
+                <g class="equipment desalter" data-equip="desalter" filter="url(#softShadow)"><rect x="225" y="349" width="130" height="56" rx="25"/><text x="290" y="382" text-anchor="middle">Desalter</text></g>
+                <path class="pipe blue" d="M288 405V456" marker-end="url(#arrowBlue)"/><text x="246" y="477" class="stream-name">Water / Brine</text><text x="259" y="493">30 m³/h</text>
+
+                <g class="preheat-label"><text x="366" y="214" class="stream-name">Preheat Train</text><text x="367" y="232" id="pfdPreheatTemp">Outlet: 250 °C</text></g>
+                <g class="equipment preheat" data-equip="preheat" filter="url(#softShadow)"><rect x="410" y="232" width="72" height="26" rx="4"/><rect x="410" y="274" width="72" height="26" rx="4"/><rect x="410" y="316" width="72" height="26" rx="4"/></g>
+
+                <g class="equipment furnace" data-equip="furnace" filter="url(#softShadow)"><path d="M520 386V290h20v-55h31v55h21v96Z"/><path class="heater-coil" d="M535 362h43v-11h-43v-14h43v-12h-43v-14h43"/><path class="heater-flame" d="M547 377c0-13 8-21 13-30 2 11 9 14 9 24 0 10-6 16-12 16s-10-4-10-10z"/></g>
+                <text x="557" y="411" text-anchor="middle" class="equip-name">Furnace</text><text x="557" y="426" text-anchor="middle" class="equip-tag">F-101</text><text x="557" y="442" text-anchor="middle" id="pfdFurnaceTemp">382.5 °C</text>
+
+                <g class="equipment column" data-equip="column" filter="url(#softShadow)">
+                  <rect x="744" y="100" width="96" height="420" rx="45"/>
+                  <line x1="745" x2="839" y1="184" y2="184"/><line x1="745" x2="839" y1="276" y2="276"/><line x1="745" x2="839" y1="365" y2="365"/><line x1="745" x2="839" y1="446" y2="446"/>
+                  <text x="792" y="143" text-anchor="middle">Overhead</text><text x="792" y="159" text-anchor="middle">(1 – 8)</text>
+                  <text x="792" y="228" text-anchor="middle">Upper</text><text x="792" y="244" text-anchor="middle">(9 – 20)</text>
+                  <text x="792" y="318" text-anchor="middle">Middle</text><text x="792" y="334" text-anchor="middle">(21 – 35)</text>
+                  <text x="792" y="400" text-anchor="middle">Lower</text><text x="792" y="416" text-anchor="middle">(36 – 50)</text>
+                  <text x="792" y="480" text-anchor="middle" class="white-label">Flash Zone</text><text x="792" y="496" text-anchor="middle" class="white-label">(51 – 62)</text>
+                </g>
+                <text x="792" y="70" text-anchor="middle" class="equip-name">Atmospheric</text><text x="792" y="87" text-anchor="middle" class="equip-name">Column</text><text x="792" y="103" text-anchor="middle" class="equip-tag">T-101</text>
+                <g class="top-pressure-label"><text x="732" y="112" text-anchor="end" class="stream-name">OVHD Pressure</text><text x="732" y="128" text-anchor="end" id="pfdTopP">1.35 bar(g)</text></g>
+
+                <g class="equipment condenser" data-equip="condenser" filter="url(#softShadow)"><circle cx="925" cy="58" r="18"/><path d="M913 58l6-10 7 20 8-20 8 20"/></g><text x="925" y="30" text-anchor="middle" class="small-name">Condenser</text>
+                <g class="equipment reflux-drum" data-equip="reflux" filter="url(#softShadow)"><rect x="1000" y="82" width="88" height="45" rx="19"/><line x1="1017" x2="1071" y1="105" y2="105"/></g><text x="1044" y="149" text-anchor="middle" class="small-name">Reflux Drum</text>
+                <text x="1038" y="24" text-anchor="middle" class="stream-name">OVHD Product Flow</text><text x="1038" y="40" text-anchor="middle" id="pfdOvhdProductFlow">30 m³/h</text>
+                <text x="875" y="145" class="stream-name">Reflux</text><text x="875" y="161" id="pfdReflux">220 m³/h</text><text x="875" y="177">106 °C</text>
+                <text x="998" y="174" class="stream-name">Naphtha</text><text x="998" y="190" id="pfdNaphthaFlow">120 m³/h</text><text x="998" y="206" class="sub-label">(Overhead Product)</text>
+
+                <g class="pa-group">
+                  <g class="equipment pa-symbol" transform="translate(655 205)"><circle r="17"/><path d="M-9 0l5-8 7 16 8-16"/></g><text x="604" y="181" class="pa-label">PA-1</text><text x="604" y="196" id="pfdPa1">350 m³/h</text>
+                  <g class="equipment pa-symbol" transform="translate(655 276)"><circle r="17"/><path d="M-9 0l5-8 7 16 8-16"/></g><text x="604" y="252" class="pa-label">PA-2</text><text x="604" y="267" id="pfdPa2">420 m³/h</text>
+                  <g class="equipment pa-symbol" transform="translate(655 349)"><circle r="17"/><path d="M-9 0l5-8 7 16 8-16"/></g><text x="604" y="325" class="pa-label">PA-3</text><text x="604" y="340" id="pfdPa3">460 m³/h</text>
+                  <g class="equipment pa-symbol" transform="translate(655 423)"><circle r="17"/><path d="M-9 0l5-8 7 16 8-16"/></g><text x="604" y="399" class="pa-label">PA-4</text><text x="604" y="414" id="pfdPa4">400 m³/h</text>
+                  <text x="610" y="565" class="stream-name">Pumparounds</text><text x="582" y="581" class="sub-label">(Heat recovered to preheat train)</text>
+                </g>
+
+                <g class="strippers">
+                  <g class="equipment stripper" data-equip="strip1"><rect x="914" y="204" width="30" height="52" rx="13"/><line x1="917" x2="941" y1="230" y2="230"/></g><text x="906" y="194" text-anchor="end" class="stripper-tag">T-102</text><text x="906" y="208" text-anchor="end" class="stripper-name">Swing Naphtha</text><text x="906" y="222" text-anchor="end" class="stripper-name">Stripper</text>
+                  <g class="equipment stripper" data-equip="strip2"><rect x="914" y="274" width="30" height="52" rx="13"/><line x1="917" x2="941" y1="300" y2="300"/></g><text x="906" y="264" text-anchor="end" class="stripper-tag">T-103</text><text x="906" y="278" text-anchor="end" class="stripper-name">Kerosene</text><text x="906" y="292" text-anchor="end" class="stripper-name">Stripper</text>
+                  <g class="equipment stripper" data-equip="strip3"><rect x="914" y="344" width="30" height="52" rx="13"/><line x1="917" x2="941" y1="370" y2="370"/></g><text x="906" y="334" text-anchor="end" class="stripper-tag">T-104</text><text x="906" y="348" text-anchor="end" class="stripper-name">LGO</text><text x="906" y="362" text-anchor="end" class="stripper-name">Stripper</text>
+                  <g class="equipment stripper" data-equip="strip4"><rect x="914" y="415" width="30" height="52" rx="13"/><line x1="917" x2="941" y1="441" y2="441"/></g><text x="906" y="405" text-anchor="end" class="stripper-tag">T-105</text><text x="906" y="419" text-anchor="end" class="stripper-name">HGO</text><text x="906" y="433" text-anchor="end" class="stripper-name">Stripper</text>
+                </g>
+                <g class="product-labels">
+                  <text x="991" y="220" class="stream-name">Swing Naphtha</text><text x="991" y="236" id="pfdSwingFlow">60 m³/h</text><text x="991" y="252" class="sub-label">(Reboiled)</text>
+                  <text x="991" y="290" class="stream-name">Kerosene</text><text x="991" y="306" id="pfdKeroFlow">110 m³/h</text><text x="991" y="322" class="sub-label">(Reboiled)</text>
+                  <text x="991" y="360" class="stream-name">LGO</text><text x="991" y="376" id="pfdLgoFlow">150 m³/h</text><text x="991" y="392" class="sub-label">(Steam: 3.0 t/h)</text>
+                  <text x="991" y="431" class="stream-name">HGO</text><text x="991" y="447" id="pfdHgoFlow">140 m³/h</text><text x="991" y="463" class="sub-label">(Steam: 1.5 t/h)</text>
+                  <text x="908" y="548" class="stream-name">Atmospheric Residue</text><text x="908" y="565" id="pfdResidueFlow">160 m³/h</text>
+                </g>
+              </svg>
+            </div>
+          </section>
+
+          <aside class="right-stack">
+            <section class="right-card alarm-card">
+              <div class="mini-head"><h3>Plant Alarms <span>(From DCS)</span></h3><button data-view-link="alarms">View All →</button></div>
+              <div id="alarmSummary" class="alarm-summary healthy"><span class="circle-icon">✓</span><div><strong>No active critical alarms</strong><small><b id="alarmActiveCount">0</b> active / <b id="alarmUnackCount">0</b> unacknowledged</small></div><em>Connected (Demo)</em></div>
+              <p class="note">Alarm display is from a demo dataset. In a real deployment, this connects to the plant DCS/ALM system (read-only).</p>
+            </section>
+
+            <section class="right-card ai-card-main">
+              <div class="mini-head"><h3>AI Analysis &amp; Findings</h3><button data-view-link="ai">What does this mean? →</button></div>
+              <div class="ai-status-layout">
+                <div id="aiStateBox" class="ai-state healthy"><span class="circle-icon">✓</span><div><strong id="aiStateTitle">Normal Operation</strong><small id="aiStateText">No abnormal patterns detected.</small></div></div>
+                <div class="health-gauge" id="healthGauge" style="--health:94"><div><small>Unit Health</small><strong id="healthValue">94%</strong><span id="healthLabel">Stable</span></div></div>
+              </div>
+              <div class="ai-info">AI is monitoring for multivariable patterns, performance deviations and unusual process behaviour that may not be captured by single-point alarms.</div>
+            </section>
+
+            <section class="right-card indicators-card">
+              <div class="mini-head"><h3>Key Indicators <span>(Current vs Typical)</span></h3><button data-view-link="trends">View Trends →</button></div>
+              <div class="indicator-grid">
+                <article><i class="icon blue">◉</i><div><span>Crude Feed</span><strong id="kpiFeed">1,000 m³/h</strong><small id="kpiFeedDelta">0%</small><b><u id="barFeed"></u></b></div></article>
+                <article><i class="icon red">♨</i><div><span>Furnace Outlet T</span><strong id="kpiFurnace">382.5 °C</strong><small id="kpiFurnaceDelta">0%</small><b><u id="barFurnace"></u></b></div></article>
+                <article><i class="icon teal">P</i><div><span>Top Pressure</span><strong id="kpiTopP">1.35 bar(g)</strong><small id="kpiTopPDelta">0%</small><b><u id="barTopP"></u></b></div></article>
+                <article><i class="icon cyan">↺</i><div><span>Reflux Flow</span><strong id="kpiReflux">220 m³/h</strong><small id="kpiRefluxDelta">0%</small><b><u id="barReflux"></u></b></div></article>
+                <article><i class="icon amber">Δ</i><div><span>Column ΔP</span><strong id="kpiDP">0.42 bar</strong><small id="kpiDPDelta">0%</small><b><u id="barDP"></u></b></div></article>
+                <article><i class="icon purple">▾</i><div><span>Residue Flow</span><strong id="kpiResidue">160 m³/h</strong><small id="kpiResidueDelta">0%</small><b><u id="barResidue"></u></b></div></article>
+              </div>
+            </section>
+          </aside>
+        </div>
+
+        <div class="bottom-grid">
+          <section class="bottom-card trend-card-main">
+            <div class="bottom-head"><h3>Selected Trend</h3><div class="trend-tools"><select id="selectedTrend"><option value="furnace">Furnace Outlet Temperature (°C)</option><option value="topP">Top Pressure (bar(g))</option><option value="offgas">OVHD Product Flow (m³/h)</option><option value="reflux">Reflux Flow (m³/h)</option><option value="dp">Column ΔP (bar)</option><option value="feed">Crude Feed (m³/h)</option></select><div class="time-tabs"><button data-hours="1" class="active">1H</button><button data-hours="4">4H</button><button data-hours="8">8H</button><button data-hours="24">24H</button></div></div></div>
+            <div class="trend-legend"><span><i class="current-line"></i>Current</span><span><i class="typical-line"></i>Typical Range</span></div>
+            <div id="selectedTrendChart" class="selected-chart"></div>
+          </section>
+
+          <section class="bottom-card operating-context">
+            <div class="bottom-head"><h3>Operating Context</h3></div>
+            <dl><div><dt>Mode</dt><dd id="ctxMode">Normal</dd></div><div><dt>Feed Target</dt><dd>1,000 m³/h</dd></div><div><dt>Current Feed</dt><dd id="ctxFeed">1,000 m³/h</dd></div><div><dt>Furnace Duty</dt><dd id="ctxDuty">85 MW</dd></div><div><dt>Last Major Event</dt><dd id="ctxEvent">–</dd></div><div><dt>Data Quality</dt><dd><span class="quality-dot"></span> Good</dd></div></dl>
+          </section>
+
+          <section class="bottom-card operator-checks">
+            <div class="bottom-head"><div><h3>Recommended Operator Checks</h3><p>Based on current status</p></div></div>
+            <ul id="operatorChecks"><li>✓ No immediate action required.</li><li>✓ Continue normal monitoring.</li><li>✓ Review trends if any parameter deviates.</li><li>✓ Use Scenario Testing to explore abnormal conditions.</li></ul>
+            <div class="safety-note">ProcessGuard does not replace DCS alarms or ESD functions. It provides additional analysis, context and investigation support.</div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="view-operator"><div class="secondary-page"><h2>Operator View</h2><p>Prioritized incidents, DCS alarms, control-loop context and recommended checks.</p><div id="operatorIncidentPanel" class="secondary-grid"></div></div></section>
+      <section class="view" id="view-engineer"><div class="secondary-page"><h2>Engineer View</h2><p>Model residuals, root-cause evidence, forecast and digital-twin analysis.</p><div id="engineerPanel" class="secondary-grid"></div></div></section>
+      <section class="view" id="view-trends"><div class="secondary-page"><div class="page-head-row"><div><h2>Trends &amp; Analytics</h2><p>All important signals remain visible before, during and after events.</p></div><button class="action" data-view-link="overview">← Overview</button></div><div id="allTrendsGrid" class="all-trends-grid"></div></div></section>
+      <section class="view" id="view-scenario"><div class="secondary-page"><h2>Scenario Testing</h2><p>Inject one synthetic process disturbance and follow the full Detect → Explain → Forecast → What-if → Replay workflow.</p><div class="scenario-page-grid"><section class="scenario-panel"><label>Scenario<select id="scenarioSelect"><option value="furnace">F-101 gradual heat-transfer degradation</option><option value="valve">Reflux control-valve stiction / response mismatch</option><option value="condenser">E-201 condenser performance degradation</option><option value="highFeed">High feed / approaching hydraulic limitation</option><option value="preheat">Preheat-train fouling / heat-recovery degradation</option></select></label><label>Severity<select id="severitySelect"><option value="mild">Mild</option><option value="medium" selected>Medium</option><option value="strong">Strong</option></select></label><button id="scenarioRunBtn" class="action primary wide">Inject scenario</button><button id="scenarioClearBtn" class="action wide">Clear / return to steady state</button></section><section id="scenarioExplanation" class="scenario-panel"></section></div></div></section>
+      <section class="view" id="view-tags"><div class="secondary-page"><h2>Tag Explorer</h2><p>Measured, calculated and model-estimated values with provenance and quality.</p><div class="tag-search"><input id="tagSearch" placeholder="Search tag or parameter…"></div><div id="tagTableWrap"></div></div></section>
+      <section class="view" id="view-alarms"><div class="secondary-page"><h2>Alarm Comparison</h2><p>DCS limits remain separate from ProcessGuard predictive incidents.</p><div id="alarmComparePanel"></div></div></section>
+      <section class="view" id="view-kpis"><div class="secondary-page"><h2>Mass Balance &amp; KPIs</h2><p>Product redistribution, energy penalty and operating impact.</p><div id="massBalancePanel"></div></div></section>
+      <section class="view" id="view-ai"><div class="secondary-page"><h2>AI Explanation &amp; Incident Workspace</h2><p>Evidence-first explanation: event map, model calculation, root cause, forecast, What-if and replay.</p><div class="workspace-tabs" id="workspaceTabs"><button class="active" data-tab="summary">Summary</button><button data-tab="evidence">Evidence</button><button data-tab="root">Root Cause</button><button data-tab="forecast">Forecast</button><button data-tab="whatif">What-if</button><button data-tab="replay">Event Replay</button><button data-tab="model">Model Details</button></div><div id="workspaceContent"></div></div></section>
+      <section class="view" id="view-reports"><div class="secondary-page"><h2>Reports</h2><div id="reportsPanel"></div></div></section>
+      <section class="view" id="view-settings"><div class="secondary-page"><h2>Settings</h2><div class="settings-grid"><section><h3>Data source</h3><p>Synthetic demonstration data. Future architecture: DCS/historian/OPC UA + UniSim/HYSYS-derived process model.</p></section><section><h3>Twin synchronization</h3><p>Plant tags 1–5 s · residual engine 5–10 s · hybrid twin 15–30 s · forecast 30–60 s.</p></section><section><h3>Safety boundary</h3><p>Read-only/advisory. What-if results are never written directly to plant controls.</p></section></div></div></section>
+    </main>
+  </div>
+</div>
+
+<dialog id="scenarioDialog">
+  <form method="dialog"><button class="dialog-close" aria-label="Close">×</button></form>
+  <span class="eyebrow">SYNTHETIC SCENARIO TEST</span><h2>Inject process disturbance</h2><p>Every scenario uses the same investigation workflow but its own process physics and evidence.</p>
+  <label>Scenario<select id="quickScenario"><option value="furnace">F-101 gradual heat-transfer degradation</option><option value="valve">Reflux control-valve stiction</option><option value="condenser">Condenser degradation</option><option value="highFeed">High feed / hydraulic limitation</option><option value="preheat">Preheat-train fouling</option></select></label>
+  <label>Severity<select id="quickSeverity"><option value="mild">Mild</option><option value="medium" selected>Medium</option><option value="strong">Strong</option></select></label>
+  <button id="quickInjectConfirm" class="action primary wide" type="button">Inject and return to Overview</button>
+  <small>Engineering demonstration only · no command is sent to DCS/SIS.</small>
+</dialog>
+<div id="toast" class="toast"></div>
+<script src="./app.js"></script>
+</body>
+</html>
