@@ -1,0 +1,124 @@
+/* ProcessGuard V17 — Preheat Health module styles (uses tokens from styles.css) */
+
+/* ---------- PFD exchangers ---------- */
+.preheat .hx-box { fill: #f5fafd; stroke-dasharray: 4 3; }
+.hx-g { cursor: pointer; outline: none; }
+.hx-ring { fill: #fff; stroke-width: 3.2; vector-effect: non-scaling-stroke; transition: stroke .4s; }
+.hx-ok { stroke: var(--green); }
+.hx-warn { stroke: var(--amber); }
+.hx-bad { stroke: var(--red); }
+.hx-num { font-size: 11px; font-weight: 900; fill: #0b3155; pointer-events: none; }
+.hx-g:hover .hx-ring, .hx-g:focus-visible .hx-ring { fill: #e8f4fc; stroke-width: 4.5; }
+.mode-equipment .hx-group, .mode-ai .hx-group { opacity: 1; }
+
+/* ---------- Scenario sub-options ---------- */
+.ph-opts { display: grid; gap: 8px; margin: 2px 0 6px; padding: 8px; border: 1px dashed var(--line); border-radius: 6px; background: #f7fbfd; }
+.ph-opts label { display: grid; gap: 4px; }
+
+/* ---------- View ---------- */
+#preheatPanel .page-head-row { margin-bottom: 8px; }
+.ph-head-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.ph-banner { margin: 0 0 10px; padding: 8px 10px; border-radius: 6px; background: var(--amberbg); border: 1px solid #f0d58f; color: #6c4d00; font-size: 10px; line-height: 1.45; }
+.ph-tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; margin-bottom: 10px; }
+.ph-tile { background: #fff; border: 1px solid var(--line2); border-radius: 6px; padding: 10px 12px; display: grid; gap: 3px; box-shadow: var(--shadow); }
+.ph-tile span { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; font-weight: 700; }
+.ph-tile strong { font-size: 19px; color: #10355a; font-variant-numeric: tabular-nums; }
+.ph-tile small { font-size: 9.5px; color: #526d80; line-height: 1.4; }
+.ph-train-card { margin-bottom: 10px; background: #fff; }
+.ph-card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.ph-train { display: block; width: 100%; height: auto; max-height: 230px; }
+.ph-vessel { fill: url(#vesselBlue); stroke: #193246; stroke-width: 1.4; }
+.ph-heater { fill: #fff1e6; stroke: var(--orange); stroke-width: 2; }
+.ph-hx { fill: #fff; stroke-width: 3.5; }
+.ph-ring-ok { stroke: var(--green); } .ph-ring-warn { stroke: var(--amber); } .ph-ring-bad { stroke: var(--red); }
+.ph-hx-zig { fill: none; stroke: #193246; stroke-width: 1.4; }
+.ph-hx-g { cursor: pointer; outline: none; }
+.ph-hx-g:hover .ph-hx, .ph-hx-g:focus-visible .ph-hx { fill: #e8f4fc; stroke-width: 5; }
+.ph-t-s { font-size: 11px; font-weight: 900; fill: #0b3155; }
+.ph-t-m { font-size: 10px; fill: #526d80; font-variant-numeric: tabular-nums; }
+.ph-t-tag { font-size: 12px; font-weight: 900; fill: #10355a; }
+.ph-t-hot { font-size: 10px; font-weight: 700; fill: var(--orange); }
+
+.ph-table-wrap { overflow-x: auto; margin-bottom: 2px; }
+.ph-table { min-width: 860px; }
+.ph-table .ph-row { cursor: pointer; }
+.ph-table .ph-row:hover td, .ph-table .ph-row:focus-visible td { background: #f1f8fd; }
+.ph-table .ph-row:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.ph-total td { background: #f7fafc; }
+.ph-num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ph-pill { display: inline-block; min-width: 46px; text-align: center; padding: 2px 8px; border-radius: 999px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.ph-ok { background: var(--greenbg); color: var(--green); }
+.ph-warn { background: var(--amberbg); color: #a26d00; }
+.ph-bad { background: var(--redbg); color: var(--red); }
+.ph-small { font-size: 9px !important; color: #6b7d8f !important; line-height: 1.45; }
+.ph-foot { margin-top: 10px; }
+.ph-plan { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 6px; }
+.ph-plan li { font-size: 10px; color: #26455f; }
+.ph-plan small { color: #6b7d8f; }
+.ph-events { list-style: none; padding: 0; margin: 8px 0 0; display: flex; flex-wrap: wrap; gap: 4px 14px; }
+.ph-events li { font-size: 9px; color: #526d80; }
+.ph-inline { font-size: 10px; color: #526d80; display: flex; gap: 6px; align-items: center; }
+.ph-inline select { border: 1px solid #c4d1da; border-radius: 4px; padding: 3px 6px; }
+
+.ph-chart-wrap { overflow-x: auto; }
+.ph-chart { display: block; width: 100%; min-width: 560px; height: auto; }
+.ph-band-ok { fill: rgba(21, 152, 95, .06); }
+.ph-band-warn { fill: rgba(217, 153, 16, .09); }
+.ph-band-bad { fill: rgba(223, 61, 61, .08); }
+.ph-grid { stroke: #e3ebf0; stroke-width: 1; }
+.ph-axis { font-size: 9px; fill: #6b7d8f; font-variant-numeric: tabular-nums; }
+.ph-event { stroke: #8aa0b2; stroke-width: 1; stroke-dasharray: 3 3; }
+.ph-inj-band { fill: rgba(239, 107, 36, .12); }
+.ph-line { fill: none; stroke: var(--blue); stroke-width: 2.2; stroke-linejoin: round; }
+.ph-line-bg { fill: none; stroke: #b9c9d5; stroke-width: 1; opacity: .8; }
+.ph-dot { fill: var(--blue); stroke: #fff; stroke-width: 2; }
+
+.ph-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 10px; margin: 6px 0 8px; }
+.ph-field { display: grid; gap: 3px; font-size: 9.5px; color: #526d80; }
+.ph-field-in { display: flex; align-items: center; gap: 5px; }
+.ph-field input { width: 100%; min-width: 0; border: 1px solid #c4d1da; border-radius: 4px; padding: 5px 7px; font-variant-numeric: tabular-nums; }
+.ph-field input:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+.ph-field em { font-style: normal; color: #7f93a4; white-space: nowrap; }
+
+/* ---------- Drawer ---------- */
+.ph-scrim { position: fixed; inset: 0; background: rgba(8, 47, 84, .22); z-index: 40; }
+.ph-drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(430px, 100vw); background: #fff; z-index: 41; box-shadow: -8px 0 28px rgba(8, 47, 84, .18); transform: translateX(100%); transition: transform .18s ease-out; overflow-y: auto; padding: 0 16px 20px; }
+.ph-drawer.open { transform: translateX(0); }
+.ph-dr-bar { position: sticky; top: 0; background: #fff; display: flex; justify-content: space-between; align-items: center; padding: 10px 0 8px; border-bottom: 1px solid var(--line2); z-index: 1; }
+.ph-dr-bar .dialog-close { position: static; }
+.ph-dr-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin: 12px 0 8px; }
+.ph-dr-head h2 { margin: 2px 0; font-size: 22px; color: #10355a; }
+.ph-dr-head p { margin: 0; font-size: 10.5px; color: #526d80; }
+.ph-eyebrow { font-size: 9px; text-transform: uppercase; letter-spacing: .06em; color: var(--blue); font-weight: 800; }
+.ph-dr-health { display: grid; justify-items: end; gap: 3px; }
+.ph-dr-health .ph-pill { font-size: 14px; }
+.ph-dr-health small { font-size: 9.5px; color: #6b7d8f; }
+.ph-kv { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 10px; }
+.ph-kv div { border: 1px solid var(--line2); border-radius: 5px; padding: 6px 8px; display: grid; gap: 2px; background: #fbfdfe; }
+.ph-kv span { font-size: 9px; color: #6b7d8f; }
+.ph-kv b { font-size: 11px; color: #10355a; font-variant-numeric: tabular-nums; }
+.ph-drawer h3 { font-size: 11.5px; color: #153d5c; margin: 12px 0 6px; }
+.ph-mini { display: block; width: 100%; height: auto; }
+.ph-note { margin-top: 10px; padding: 8px 10px; border-radius: 5px; background: #f4f7fb; border: 1px solid var(--line2); font-size: 10px; color: #3d5a70; line-height: 1.45; }
+
+@media (min-width: 1200px) {
+  .ph-tile span { font-size: 10px; }
+  .ph-tile strong { font-size: 22px; }
+  .ph-tile small { font-size: 10.5px; }
+  .ph-banner { font-size: 11px; }
+  .ph-small { font-size: 10px !important; }
+  .ph-plan li { font-size: 11px; }
+  .ph-events li { font-size: 10px; }
+  .ph-field { font-size: 10.5px; }
+  .ph-inline { font-size: 11px; }
+}
+@media (max-width: 980px) {
+  .ph-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+  .ph-tiles { grid-template-columns: 1fr; }
+  .ph-fields { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ph-drawer, .hx-ring { transition: none; }
+}

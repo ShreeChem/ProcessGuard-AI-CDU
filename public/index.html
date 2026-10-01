@@ -6,6 +6,7 @@
   <meta name="description" content="ProcessGuard AI CDU predictive operations dashboard">
   <title>ProcessGuard AI | CDU Intelligence</title>
   <link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./preheat.css">
 </head>
 <body>
 <div class="app-shell">
@@ -17,7 +18,7 @@
     <nav class="side-nav" aria-label="Application navigation">
       <button class="active" data-view-link="overview"><span>⌂</span>Overview</button>
       <button data-view-link="operator"><span>◉</span>Operator View</button>
-      <button data-view-link="engineer"><span>◇</span>Engineer View</button>
+      <button data-view-link="engineer"><span>◇</span>Engineer View</button><button data-view-link="preheat"><span>≋</span>Preheat Health</button>
       <button data-view-link="trends"><span>⌁</span>Trends &amp; Analytics</button>
       <button data-view-link="scenario"><span>▶</span>Scenario Testing</button>
       <button data-view-link="tags"><span>⌕</span>Tag Explorer</button>
@@ -87,7 +88,7 @@
                 <g id="streamGroup" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path class="pipe green" d="M25 377H107" marker-end="url(#arrowGreen)"/>
                   <path class="pipe green" d="M147 377H225" marker-end="url(#arrowGreen)"/>
-                  <path class="pipe green" d="M355 377H520" marker-end="url(#arrowGreen)"/>
+                  <path class="pipe green" d="M355 377H384V349" marker-end="url(#arrowGreen)"/><path class="pipe green" d="M490 344V377H520" marker-end="url(#arrowGreen)"/>
                   <path class="pipe furnace-feed" d="M592 377H705V470H744" stroke="#ed542d" marker-end="url(#arrowRed)"/>
                   <path class="pipe blue overhead-line" d="M790 100V58H907" marker-end="url(#arrowBlue)"/>
                   <path class="pipe blue overhead-line" d="M943 58H1000V92" marker-end="url(#arrowBlue)"/>
@@ -120,13 +121,13 @@
                   <path class="steam-line" d="M927 457V485H868V463H840" marker-end="url(#arrowGray)"/>
                   <path class="pipe red residue-line" d="M790 520V558H1044" marker-end="url(#arrowRed)"/>
 
-                  <path class="recovery-line" d="M365 245V329"/>
-                  <path class="recovery-line" d="M365 245H410"/>
-                  <path class="recovery-line" d="M365 287H410"/>
-                  <path class="recovery-line" d="M365 329H410"/>
-                  <path class="recovery-line" d="M482 245H498V377H520" marker-end="url(#arrowOrange)"/>
-                  <path class="recovery-line" d="M482 287H498"/>
-                  <path class="recovery-line" d="M482 329H498"/>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
                 </g>
 
                 <g class="labels">
@@ -138,7 +139,7 @@
                 <path class="pipe blue" d="M288 405V456" marker-end="url(#arrowBlue)"/><text x="246" y="477" class="stream-name">Water / Brine</text><text x="259" y="493">30 m³/h</text>
 
                 <g class="preheat-label"><text x="366" y="214" class="stream-name">Preheat Train</text><text x="367" y="232" id="pfdPreheatTemp">Outlet: 250 °C</text></g>
-                <g class="equipment preheat" data-equip="preheat" filter="url(#softShadow)"><rect x="410" y="232" width="72" height="26" rx="4"/><rect x="410" y="274" width="72" height="26" rx="4"/><rect x="410" y="316" width="72" height="26" rx="4"/></g>
+                <g class="equipment preheat" data-equip="preheat"><rect class="hx-box" x="372" y="244" width="130" height="100" rx="8"/></g><g class="hx-group" filter="url(#softShadow)"><g class="hx-g" data-hx="0" tabindex="0" role="button" aria-label="E-101"><title>E-101</title><circle cx="396" cy="270" r="16" class="hx-ring hx-ok"/><text x="396" y="274" text-anchor="middle" class="hx-num">101</text></g><g class="hx-g" data-hx="1" tabindex="0" role="button" aria-label="E-102"><title>E-102</title><circle cx="437" cy="270" r="16" class="hx-ring hx-ok"/><text x="437" y="274" text-anchor="middle" class="hx-num">102</text></g><g class="hx-g" data-hx="2" tabindex="0" role="button" aria-label="E-103"><title>E-103</title><circle cx="478" cy="270" r="16" class="hx-ring hx-ok"/><text x="478" y="274" text-anchor="middle" class="hx-num">103</text></g><g class="hx-g" data-hx="3" tabindex="0" role="button" aria-label="E-104"><title>E-104</title><circle cx="396" cy="316" r="16" class="hx-ring hx-ok"/><text x="396" y="320" text-anchor="middle" class="hx-num">104</text></g><g class="hx-g" data-hx="4" tabindex="0" role="button" aria-label="E-105"><title>E-105</title><circle cx="437" cy="316" r="16" class="hx-ring hx-ok"/><text x="437" y="320" text-anchor="middle" class="hx-num">105</text></g><g class="hx-g" data-hx="5" tabindex="0" role="button" aria-label="E-106"><title>E-106</title><circle cx="478" cy="316" r="16" class="hx-ring hx-ok"/><text x="478" y="320" text-anchor="middle" class="hx-num">106</text></g></g>
 
                 <g class="equipment furnace" data-equip="furnace" filter="url(#softShadow)"><path d="M520 386V290h20v-55h31v55h21v96Z"/><path class="heater-coil" d="M535 362h43v-11h-43v-14h43v-12h-43v-14h43"/><path class="heater-flame" d="M547 377c0-13 8-21 13-30 2 11 9 14 9 24 0 10-6 16-12 16s-10-4-10-10z"/></g>
                 <text x="557" y="411" text-anchor="middle" class="equip-name">Furnace</text><text x="557" y="426" text-anchor="middle" class="equip-tag">F-101</text><text x="557" y="442" text-anchor="middle" id="pfdFurnaceTemp">382.5 °C</text>
@@ -238,8 +239,8 @@
 
       <section class="view" id="view-operator"><div class="secondary-page"><h2>Operator View</h2><p>Prioritized incidents, DCS alarms, control-loop context and recommended checks.</p><div id="operatorIncidentPanel" class="secondary-grid"></div></div></section>
       <section class="view" id="view-engineer"><div class="secondary-page"><h2>Engineer View</h2><p>Model residuals, root-cause evidence, forecast and digital-twin analysis.</p><div id="engineerPanel" class="secondary-grid"></div></div></section>
-      <section class="view" id="view-trends"><div class="secondary-page"><div class="page-head-row"><div><h2>Trends &amp; Analytics</h2><p>All important signals remain visible before, during and after events.</p></div><button class="action" data-view-link="overview">← Overview</button></div><div id="allTrendsGrid" class="all-trends-grid"></div></div></section>
-      <section class="view" id="view-scenario"><div class="secondary-page"><h2>Scenario Testing</h2><p>Inject one synthetic process disturbance and follow the full Detect → Explain → Forecast → What-if → Replay workflow.</p><div class="scenario-page-grid"><section class="scenario-panel"><label>Scenario<select id="scenarioSelect"><option value="furnace">F-101 gradual heat-transfer degradation</option><option value="valve">Reflux control-valve stiction / response mismatch</option><option value="condenser">E-201 condenser performance degradation</option><option value="highFeed">High feed / approaching hydraulic limitation</option><option value="preheat">Preheat-train fouling / heat-recovery degradation</option></select></label><label>Severity<select id="severitySelect"><option value="mild">Mild</option><option value="medium" selected>Medium</option><option value="strong">Strong</option></select></label><button id="scenarioRunBtn" class="action primary wide">Inject scenario</button><button id="scenarioClearBtn" class="action wide">Clear / return to steady state</button></section><section id="scenarioExplanation" class="scenario-panel"></section></div></div></section>
+      <section class="view" id="view-preheat"><div class="secondary-page" id="preheatPanel" data-no-i18n><p>Loading preheat model…</p></div></section><section class="view" id="view-trends"><div class="secondary-page"><div class="page-head-row"><div><h2>Trends &amp; Analytics</h2><p>All important signals remain visible before, during and after events.</p></div><button class="action" data-view-link="overview">← Overview</button></div><div id="allTrendsGrid" class="all-trends-grid"></div></div></section>
+      <section class="view" id="view-scenario"><div class="secondary-page"><h2>Scenario Testing</h2><p>Inject one synthetic process disturbance and follow the full Detect → Explain → Forecast → What-if → Replay workflow.</p><div class="scenario-page-grid"><section class="scenario-panel"><label>Scenario<select id="scenarioSelect"><option value="furnace">F-101 gradual heat-transfer degradation</option><option value="valve">Reflux control-valve stiction / response mismatch</option><option value="condenser">E-201 condenser performance degradation</option><option value="highFeed">High feed / approaching hydraulic limitation</option><option value="preheat">Preheat-train fouling / heat-recovery degradation</option></select></label><label>Severity<select id="severitySelect"><option value="mild">Mild</option><option value="medium" selected>Medium</option><option value="strong">Strong</option></select></label><div id="phOptsPage" class="ph-opts" hidden><label>Preheat cause<select id="phCausePage"><option value="desalter">Desalter upset (salt / solids carry-over)</option><option value="antifoulant">Antifoulant injection pump stopped</option><option value="blend">Unstable crude blend (asphaltene fouling)</option><option value="local">Single exchanger (local cause)</option></select></label><label>Exchanger<select id="phExPage"><option value="0">E-101</option><option value="1">E-102</option><option value="2">E-103</option><option value="3" selected>E-104</option><option value="4">E-105</option><option value="5">E-106</option></select></label></div><button id="scenarioRunBtn" class="action primary wide">Inject scenario</button><button id="scenarioClearBtn" class="action wide">Clear / return to steady state</button></section><section id="scenarioExplanation" class="scenario-panel"></section></div></div></section>
       <section class="view" id="view-tags"><div class="secondary-page"><h2>Tag Explorer</h2><p>Measured, calculated and model-estimated values with provenance and quality.</p><div class="tag-search"><input id="tagSearch" placeholder="Search tag or parameter…"></div><div id="tagTableWrap"></div></div></section>
       <section class="view" id="view-alarms"><div class="secondary-page"><h2>Alarm Comparison</h2><p>DCS limits remain separate from ProcessGuard predictive incidents.</p><div id="alarmComparePanel"></div></div></section>
       <section class="view" id="view-kpis"><div class="secondary-page"><h2>Mass Balance &amp; KPIs</h2><p>Product redistribution, energy penalty and operating impact.</p><div id="massBalancePanel"></div></div></section>
@@ -255,10 +256,10 @@
   <span class="eyebrow">SYNTHETIC SCENARIO TEST</span><h2>Inject process disturbance</h2><p>Every scenario uses the same investigation workflow but its own process physics and evidence.</p>
   <label>Scenario<select id="quickScenario"><option value="furnace">F-101 gradual heat-transfer degradation</option><option value="valve">Reflux control-valve stiction</option><option value="condenser">Condenser degradation</option><option value="highFeed">High feed / hydraulic limitation</option><option value="preheat">Preheat-train fouling</option></select></label>
   <label>Severity<select id="quickSeverity"><option value="mild">Mild</option><option value="medium" selected>Medium</option><option value="strong">Strong</option></select></label>
-  <button id="quickInjectConfirm" class="action primary wide" type="button">Inject and return to Overview</button>
+  <div id="phOptsDialog" class="ph-opts" hidden><label>Preheat cause<select id="phCauseDialog"><option value="desalter">Desalter upset (salt / solids carry-over)</option><option value="antifoulant">Antifoulant injection pump stopped</option><option value="blend">Unstable crude blend (asphaltene fouling)</option><option value="local">Single exchanger (local cause)</option></select></label><label>Exchanger<select id="phExDialog"><option value="0">E-101</option><option value="1">E-102</option><option value="2">E-103</option><option value="3" selected>E-104</option><option value="4">E-105</option><option value="5">E-106</option></select></label></div><button id="quickInjectConfirm" class="action primary wide" type="button">Inject and return to Overview</button>
   <small>Engineering demonstration only · no command is sent to DCS/SIS.</small>
 </dialog>
-<div id="toast" class="toast"></div>
-<script src="./app.js"></script>
+<div id="hxDrawerScrim" class="ph-scrim" hidden></div><aside id="hxDrawer" class="ph-drawer" hidden data-no-i18n aria-label="Exchanger details"><div class="ph-dr-bar"><button id="hxDrawerOpenView" class="action">Open Preheat Health</button><button id="hxDrawerClose" class="dialog-close" aria-label="Close">×</button></div><div id="hxDrawerBody"></div></aside><div id="toast" class="toast"></div>
+<script src="./preheat-engine.js"></script><script src="./app.js"></script><script src="./preheat-ui.js"></script>
 </body>
 </html>
