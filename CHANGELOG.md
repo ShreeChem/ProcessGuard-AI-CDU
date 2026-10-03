@@ -1,6 +1,6 @@
 # Changelog
 
-## V17 (review build) — branch `v17-preheat`
+## V17
 
 **Preheat Health module**
 - New `preheat-engine.js`: 6-exchanger ε-NTU network model, Ebert–Panchal-type fouling, 12-month synthetic historian data, clean-baseline regression (health %, Rf, forecast), validation against synthetic truth, network-aware economics, cleaning optimiser, rule-based root-cause hints.
