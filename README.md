@@ -6,11 +6,13 @@ ProcessGuard-AI-CDU is an engineering/AI portfolio prototype for an Atmospheric 
 
 ## Live demo
 
-https://processguard-cdu.hatchable.site/
+https://shreechem.github.io/ProcessGuard-AI-CDU/ (GitHub Pages, deployed from `main`, always the current version)
+
+Earlier host: https://processguard-cdu.hatchable.site/ (may show an older version).
 
 ## Current baseline
 
-- **V17** (Preheat Health + physics-based F-101 model) is on `main`. Confirm the Hatchable live demo has been redeployed with V17 (it previously ran V16).
+- **V17** (Preheat Health + physics-based F-101 model) is on `main` and published automatically to the GitHub Pages link above.
 - V17 adds the **Preheat Health** module and the physics-based F-101 heater model (Arab Medium crude basis).
 - Runtime files in `public/`: `index.html`, `styles.css`, `app.js`, `preheat-engine.js`, `preheat-ui.js`, `preheat.css`.
 - Optional Python service in `backend/` (FastAPI, see `backend/README.md`) exposes the same F-101 heater physics. The dashboard does not need it: an identical JavaScript twin runs in the browser.
